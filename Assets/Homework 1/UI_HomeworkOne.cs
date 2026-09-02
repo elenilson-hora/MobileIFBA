@@ -19,7 +19,7 @@ public class UI_HomeworkOne : MonoBehaviour
     private Vector2 vector2;
 
     // C#
-    private float speed = 10f;
+    private float speed = 10f, tap;
 
     // MonoBehaviour
     private void Start()
@@ -39,8 +39,19 @@ public class UI_HomeworkOne : MonoBehaviour
 
     private void OnJump(InputValue inputValue)
     {
+        tap++;
         //Debug.Log("Jump");
-
-        rb.AddForce(new Vector3(0f, 100f, 0f));
+        if(tap <= 2)
+        {
+            rb.AddForce(new Vector3(0f, 100f, 0f));
+        }
+       
+    }
+    private void OnCollisionEnter(Collision collision)
+    {
+        if (collision.collider.CompareTag("Ground"))
+        {
+            tap = 0;
+        }
     }
 }
